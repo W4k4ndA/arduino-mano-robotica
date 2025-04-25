@@ -12,7 +12,7 @@ Servo menique;
 #define pinPulgar 3
 #define pinIndice 5
 #define pinMedio 6
-#define pinAnular 9
+#define pinAnular 9 
 #define pinMenique 10
 
 // Pines para los LEDs
@@ -47,6 +47,9 @@ void setup() {
   pinMode(ledMedio, OUTPUT);
   pinMode(ledAnular, OUTPUT);
   pinMode(ledMenique, OUTPUT);
+
+  pinMode(LED_BUILTIN, OUTPUT); // Configurar el LED integrado como salida (opcional)
+  digitalWrite(LED_BUILTIN, LOW); // Apagar el LED integrado (opcional)
   
   // Inicializar comunicación serial (opcional, para depuración)
   Serial.begin(9600);
@@ -58,6 +61,8 @@ void loop() {
   for (int i = 0; i < numAngulos; i++) {
     int anguloActual = angulos[i];
     
+    digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN)); // Encender el LED integrado (opcional)
+
     Serial.print("Moviendo todos los dedos a ");
     Serial.print(anguloActual);
     Serial.println(" grados");
